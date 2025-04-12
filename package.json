@@ -1,6 +1,6 @@
 {
   "name": "devops-mar25-myapp",
-  "version": "0.0.1",
+  "version": "0.0.1-issue3",
   "private": true,
   "scripts": {
     "start": "DEBUG=:devops-mar25-myapp* nodemon ./bin/www"
@@ -14,11 +14,14 @@
     "express": "~4.16.1",
     "express-session": "^1.18.1",
     "helmet": "^8.1.0",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.2",
     "morgan": "~1.9.1",
     "redis": "^4.7.0"
   },
   "devDependencies": {
     "dotenv": "^16.4.7",
+    "jest": "^29.7.0",
     "nodemon": "^3.1.9"
   }
 }
