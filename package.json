@@ -1,6 +1,6 @@
 {
   "name": "devops-mar25-myapp",
-  "version": "0.0.1-issue3",
+  "version": "0.0.1-issue5",
   "private": true,
   "scripts": {
     "start": "DEBUG=:devops-mar25-myapp* nodemon ./bin/www"
