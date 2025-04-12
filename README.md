@@ -1,2 +1,10 @@
-# tecgurus-devops-mar25-app
-Sample application in Node.js+express for "DevOps Desde cero" Mar2025 course
+#  Tecgurus Devops desde Cero Marzo 2025
+
+
+> Aplicacion simple desarrollada en Nodejs + Express para curso **DevOps desde Cero** Marzo 2025
+
+## Comandos
+
+* `npm install`: instalacion de dependencias
+* `npm start`: inicio de proyecto
+* `npm test`: lanzamiento de pruebas unitarias
