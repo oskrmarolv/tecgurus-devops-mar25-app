@@ -24,6 +24,7 @@ pipeline {
     stage('Construccion') { 
       steps {
         sh 'sleep 10'
+        sh 'exit -1'
         sh 'npm install'
       }
     } 
@@ -33,6 +34,13 @@ pipeline {
         sh 'sleep 15'
         sh 'npm test'
       } 
-    } 
+    }
+ 
+  }
+
+  post {
+    always {
+      sh 'echo "Finalizando proceso!!"'
+    }
   }
 }
