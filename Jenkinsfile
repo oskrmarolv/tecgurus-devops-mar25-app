@@ -6,10 +6,8 @@ pipeline {
   }
 
   stages {
-    stage('Checkout') {
-      steps {
-        git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git', credentialsId: 'tecgurus_devops_mar25'
-      }
+    steps {
+      git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git', credentialsId: 'tecgurus_devops_mar25', branch: '$BRANCH_NAME'
     }
 
     stage('Install Dependencies') {
