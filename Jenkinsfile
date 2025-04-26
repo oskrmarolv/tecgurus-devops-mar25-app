@@ -6,8 +6,10 @@ pipeline {
   }
 
   stages {
-    steps {
-      git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git', credentialsId: 'tecgurus_devops_mar25', branch: '$BRANCH_NAME'
+    stage('Checkout') {
+      steps {
+        git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git', credentialsId: 'tecgurus_devops_mar25', branch: '$BRANCH_NAME'
+      }
     }
 
     stage('Install Dependencies') {
@@ -18,7 +20,7 @@ pipeline {
 
     stage('Run Tests') {
       steps {
-        sh 'sleep 15; npm test'
+        sh 'sleep 15;npm test'
       }
     }
   }
