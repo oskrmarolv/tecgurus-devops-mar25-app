@@ -24,7 +24,7 @@ pipeline {
     stage('Construccion') { 
       steps {
         sh 'sleep 10'
-        sh 'exit -1'
+        // sh 'exit -1'
         sh 'npm install'
       }
     } 
