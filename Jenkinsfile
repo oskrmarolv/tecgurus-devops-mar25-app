@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   // Precargando herramientas...
-  tool {
+  tools {
     nodejs 'nodejs-18.x.x'
   }
 
