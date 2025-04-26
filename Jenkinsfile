@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'Node 18'
+    nodejs 'nodejs-18.x.x'
   }
 
   stages {
@@ -19,6 +19,9 @@ pipeline {
     }
 
     stage('Run Tests') {
+      steps {
+        sh 'sleep 15'
+      },
       steps {
         sh 'npm test'
       }
