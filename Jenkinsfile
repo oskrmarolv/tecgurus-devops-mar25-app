@@ -42,22 +42,27 @@ pipeline {
     stage('Recuperando reporte') {
       steps{
         junit 'tests/reports/junit.xml'
+
+        publishChecks name: 'Jenkins Tests', title: 'Resultado de Test', summary: 'Reporte de pruebas unitarias.'
       }
     }
+
+    stage('Finalizando pruebas unitarias') {
+      steps {
+        sh 'echo "Finalizando proceso!!"'
+      }
+    }
+
  
   }
 
   post {
 
     success {
-        githubNotify context: 'CI Build', status: 'SUCCESS', description: 'Pruebas fueron exitosas.'
+      echo 'Ejecutando exitosa !!'
     }
     failure {
-        githubNotify context: 'CI Build', status: 'FAILURE', description: 'Pruebas han fallado.'
-    }
-
-    always {
-      sh 'echo "Finalizando proceso!!"'
+      echo 'Error en pruebas de integracion !!'
     }
 
   }
