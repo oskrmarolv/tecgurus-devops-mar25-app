@@ -1,0 +1,52 @@
+pipeline {
+
+  agent any
+
+  tools {
+
+    nodejs 'nodejs-18.x.x'
+  
+  }
+
+  stages {
+
+    stage('APP: Verificando repositorio...') {
+      steps {
+        git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git', 
+            branch: 'develop',
+            credentialsId: 'tecgurus-github-token' 
+      }
+    }
+
+    stage('APP: Instalando dependencias...') {
+      steps {
+        sh 'sleep 10'
+        sh 'npm install'
+      }
+    }
+
+    stage('Infraestructura: Verificando repositorio...') {
+      step {
+        git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-infa.git',
+            branch: 'main',
+            credentialsId: 'tecgurus-github-token',
+            changelog: false,
+            showChanges: false,
+            poll: false,
+            sparseCheckoutDir: 'infra'
+      }
+    }
+
+    stage('Infraestructura: Desplegando entorno de testing...') {
+      step {
+        sh './infra/start.sh'
+      }
+    }
+  
+  }
+
+  options {
+    timestamps()
+  }
+
+}
