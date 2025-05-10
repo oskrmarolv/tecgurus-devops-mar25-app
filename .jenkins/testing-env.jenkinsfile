@@ -61,8 +61,8 @@ pipeline {
 
     stage('Infraestructura: Desplegando entorno de testing...') {
       steps {
-        dir('devops_infra') {
-          sh './start.sh'
+        dir('devops_infra/testing') {
+          sh 'docker compose up -d'
         }
       }
     }
