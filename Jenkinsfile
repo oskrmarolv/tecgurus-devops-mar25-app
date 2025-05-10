@@ -10,10 +10,13 @@ pipeline {
   // Definiendo variables de entorno...
   environment {
     DATABASE_HOST = '127.0.0.1'
+    GITHUB_TOKEN = credentials('tecgurus-github-admin')
   }
+
 
   // Definicion de los estados y pasos a ejecutar....
   stages {
+
     stage('Revision') { 
       steps {
         git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git',
@@ -45,8 +48,26 @@ pipeline {
   }
 
   post {
+
+    success {
+        githubNotify(
+            context: 'CI Build',
+            status: 'SUCCESS',
+            description: 'Pruebas fueron exitosas.'
+        )
+    }
+    failure {
+        githubNotify(
+            context: 'CI Build',
+            status: 'FAILURE',
+            description: 'Pruebas han fallado.'
+        )
+    }
+
     always {
       sh 'echo "Finalizando proceso!!"'
     }
+
   }
+  
 }
