@@ -8,6 +8,18 @@ pipeline {
   
   }
 
+  environment {
+  
+    APP_PATH = "${WORKSPACE}"
+  
+  }
+
+  options {
+  
+    timestamps()
+  
+  }
+
   stages {
 
     stage('APP: Verificando repositorio...') {
@@ -37,25 +49,33 @@ pipeline {
       }
     }
 
+    stage('Infraestructura: Deteniendo despliegue previo...') {
+      steps {
+        dir('devops_infra') {
+          catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') { 
+            sh 'docker compose down'
+          }
+        }
+      }
+    }
+
     stage('Infraestructura: Desplegando entorno de testing...') {
       steps {
-        script {
-            env.APP_PATH = env.WORKSPACE
+        dir('devops_infra') {
+          sh './start.sh'
         }
-        sh './devops_infra/start.sh'
       }
     }
   
   }
 
   post {
+
     always {
        sh 'echo "Finalizando pipeline..."'
     }
+  
   }
 
-  options {
-    timestamps()
-  }
 
 }
