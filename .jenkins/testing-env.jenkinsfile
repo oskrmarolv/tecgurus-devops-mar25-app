@@ -1,0 +1,59 @@
+pipeline {
+
+  agent any
+
+  tools {
+    nodejs 'nodejs-18.x.x'
+  }
+
+  environment {
+    APP_PATH = "${WORKSPACE}"
+  }
+
+
+  stages {
+
+    stage('GIT: Validacion de repositorio tecgurus-app') {
+      steps {
+        git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-app.git',
+            credentialsId: 'tecgurus-github-token',
+            branch: 'develop'
+      }
+    }
+
+    stage('GIT: Validacion de repositorio tecgurus-infra') {
+      steps {
+        dir('tecgurus-infra') {
+          git url: 'https://github.com/oskrmarolv/tecgurus-devops-mar25-infra.git',
+            credentialsId: 'tecgurus-github-token',
+            branch: 'main'
+        }
+      }
+    }
+
+    stage('APP: Instalacion de dependencias') {
+      steps {
+        sh 'sleep 10'
+        sh 'npm install'
+      }
+    }
+
+    stage('ENV: Despliegue de arquitectura con contenedores') {
+      steps {
+        dir('tecgurus-infra/testing') {
+          sh 'sleep 10'
+          sh 'docker compose up -d'
+        }
+      }
+    }
+  }
+
+  post {
+
+    always {
+      sh "Finalizando pipeline!"
+    }
+
+  }
+
+}
