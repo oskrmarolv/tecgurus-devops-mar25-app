@@ -1,4 +1,5 @@
 pipeline {
+
   agent any
 
   // Precargando herramientas...
@@ -24,16 +25,21 @@ pipeline {
     stage('Construccion') { 
       steps {
         sh 'sleep 10'
-        // sh 'exit -1'
         sh 'npm install'
       }
     } 
 
-    stage('Pruebas') {
+    stage('Ejecutando pruebas unitarias') {
       steps {
         sh 'sleep 15'
-        sh 'npm test'
+        sh 'npm run test:ci'
       } 
+    }
+
+    stage('Recuperando reporte') {
+      steps{
+        junit 'tests/reports/junit.xml'
+      }
     }
  
   }
