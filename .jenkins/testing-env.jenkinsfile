@@ -31,9 +31,8 @@ pipeline {
             branch: 'main',
             credentialsId: 'tecgurus-github-token',
             changelog: false,
-            showChanges: false,
             poll: false,
-            sparseCheckoutDir: 'infra'
+            dir: 'infra'
       }
     }
 
