@@ -39,6 +39,9 @@ pipeline {
 
     stage('Infraestructura: Desplegando entorno de testing...') {
       steps {
+        script {
+            env.APP_PATH = env.WORKSPACE
+        }
         sh './devops_infra/start.sh'
       }
     }
