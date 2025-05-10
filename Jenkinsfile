@@ -50,18 +50,10 @@ pipeline {
   post {
 
     success {
-        githubNotify(
-            context: 'CI Build',
-            status: 'SUCCESS',
-            description: 'Pruebas fueron exitosas.'
-        )
+        githubNotify context: 'CI Build', status: 'SUCCESS', description: 'Pruebas fueron exitosas.'
     }
     failure {
-        githubNotify(
-            context: 'CI Build',
-            status: 'FAILURE',
-            description: 'Pruebas han fallado.'
-        )
+        githubNotify context: 'CI Build', status: 'FAILURE', description: 'Pruebas han fallado.'
     }
 
     always {
@@ -69,5 +61,5 @@ pipeline {
     }
 
   }
-  
+
 }
