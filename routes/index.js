@@ -39,7 +39,22 @@ router.get('/auth/loggedin', debugMiddleware, function(req, res, next) {
 router.get('/api/notes', debugMiddleware, function(req, res, next) {
   // c o d e ...
   const dataPayload = JSON.parse(JSON.stringify(ResponseData));
+
+  dataPayload.data = [
+    {
+      title: "Primer nota",
+      body: "Esta es una primera nota de ejemplo...",
+      createdAt: "2025/04/26 10:23:47"
+    },
+    {
+      title: "Segunda Nota",
+      body: "Esta es una primera nota de ejemplo...",
+      createdAt: "2025/04/26 10:25:47"
+    }
+  ];
+
   dataPayload.__t = Date.now();
+
 
   return res.status(200).json(dataPayload);
 });
