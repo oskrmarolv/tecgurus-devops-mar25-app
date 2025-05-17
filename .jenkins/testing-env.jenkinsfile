@@ -10,6 +10,9 @@ pipeline {
     APP_PATH = "${WORKSPACE}"
   }
 
+  triggers {
+    github push:true, branchFilter:'develop'
+  }
 
   stages {
 
@@ -51,7 +54,7 @@ pipeline {
   post {
 
     always {
-      sh "Finalizando pipeline!"
+      sh 'echo "Finalizando pipeline!"'
     }
 
   }
